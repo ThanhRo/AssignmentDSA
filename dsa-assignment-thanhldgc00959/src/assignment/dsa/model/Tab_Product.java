@@ -76,4 +76,15 @@ public class Tab_Product {
 		this.pro_image_url = pro_image_url;
 	}
 
+	public Tab_Product(String product_code, String product_name, long product_quantity, long product_sale,
+			double product_price, String product_image_url) {
+		super();
+		this.pcode = pcode;
+		this.pro_name = pro_name;
+		this.quantity = quantity;
+		this.sale = sale;
+		this.price = price;
+		this.pro_image_url = pro_image_url;
+	}
+
 }

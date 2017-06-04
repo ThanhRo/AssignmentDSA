@@ -15,9 +15,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import assignment.dsa.model.Tab_Customer;
-import assignment.dsa.model.Tab_Product;
+import assignment.module.manager.DeleteByCCode_Customer;
 import assignment.module.manager.SearchByCCode_Customer;
-import assignment.module.manager.SearchByPCode;
 
 public class Main_Customer {
 	@SuppressWarnings("unchecked")
@@ -69,6 +68,38 @@ public class Main_Customer {
 		}
 		case "2": {
 			// Add New Customer
+			JSONParser parser = new JSONParser();// DONT USE SPACE WHEN ADDING
+			try {
+				JSONArray jsonArray = (JSONArray) parser
+						.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/customers.json"));
+				List<Tab_Customer> customers = new LinkedList<>();
+				Iterator iterator = jsonArray.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonObject = (JSONObject) iterator.next();
+					String customer_code = (String) jsonObject.get("ccode");
+					String customer_name = (String) jsonObject.get("cus_name");
+					String customer_phone = (String) jsonObject.get("phone");
+					Tab_Customer tc = new Tab_Customer(customer_code, customer_name, customer_phone);
+					customers.add(tc);
+				}
+				System.out.println("Input customer code: ");
+				String cCode = scan.next();
+				System.out.println("Input customer name: ");
+				String cName = scan.next();
+				System.out.println("Input customer phone: ");
+				String cPhone = scan.next();
+				Tab_Customer tc1 = new Tab_Customer(cCode, cName, cPhone);
+				customers.add(tc1);
+				System.out.print("Successfully add");
+				menuCustomer();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			break;
 		}
 		case "3": {
 			// Search by CCode
@@ -87,6 +118,18 @@ public class Main_Customer {
 		}
 		case "4": {
 			// Delete by CCode
+			System.out.println("-------------------------------------");
+			System.out.println("-------------Delete Product----------");
+			System.out.println("Input Product Code : ");
+			String cCode = scan.next();
+			DeleteByCCode_Customer deleteCCode = new DeleteByCCode_Customer();
+			ArrayList<Tab_Customer> arraylist = deleteCCode.DeleteByCCode(cCode);
+			for (int i = 0; i < arraylist.size(); i++) {
+				Tab_Customer tc = arraylist.get(i);
+				System.out.println(tc.toString());
+			}
+			menuCustomer();
+			break;
 		}
 		case "5": {
 			Main m = new Main();

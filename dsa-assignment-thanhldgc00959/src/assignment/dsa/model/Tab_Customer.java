@@ -9,11 +9,11 @@ public class Tab_Customer {
 
 	}
 
-	public Tab_Customer(String ccode, String cus_name, String phone) {
+	public Tab_Customer(String ccode, String cus_name, String cPhone) {
 		super();
 		this.ccode = ccode;
 		this.cus_name = cus_name;
-		this.phone = phone;
+		this.phone = cPhone;
 	}
 
 	@Override
