@@ -3,13 +3,13 @@ package assignment.dsa.model;
 public class Tab_Order {
 	public String pcode;
 	public String ccode;
-	public int quantity;
+	public long quantity;
 
 	public Tab_Order() {
 
 	}
 
-	public Tab_Order(String pcode, String ccode, int quantity) {
+	public Tab_Order(String pcode, String ccode, long quantity) {
 		super();
 		this.pcode = pcode;
 		this.ccode = ccode;
@@ -32,7 +32,7 @@ public class Tab_Order {
 		this.ccode = ccode;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 

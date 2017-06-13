@@ -3,8 +3,8 @@ package assignment.dsa.model;
 public class Tab_Product {
 	public String pcode;
 	public String pro_name;
-	public int quantity;
-	public int sale;
+	public long quantity;
+	public long sale;
 	public double price;
 	public String pro_image_url;
 
@@ -28,7 +28,7 @@ public class Tab_Product {
 		this.pro_name = pro_name;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
@@ -36,7 +36,7 @@ public class Tab_Product {
 		this.quantity = quantity;
 	}
 
-	public int getSale() {
+	public long getSale() {
 		return sale;
 	}
 
@@ -66,18 +66,7 @@ public class Tab_Product {
 				+ ", price=" + price + ", pro_image_url=" + pro_image_url + "]";
 	}
 
-	public Tab_Product(String pcode, String pro_name, int quantity, int sale, double price, String pro_image_url) {
-		super();
-		this.pcode = pcode;
-		this.pro_name = pro_name;
-		this.quantity = quantity;
-		this.sale = sale;
-		this.price = price;
-		this.pro_image_url = pro_image_url;
-	}
-
-	public Tab_Product(String product_code, String product_name, long product_quantity, long product_sale,
-			double product_price, String product_image_url) {
+	public Tab_Product(String pcode, String pro_name, long quantity, long sale, double price, String pro_image_url) {
 		super();
 		this.pcode = pcode;
 		this.pro_name = pro_name;

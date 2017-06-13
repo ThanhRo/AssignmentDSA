@@ -7,6 +7,7 @@ import java.util.List;
 import apps.saleman.services.Json;
 import apps.saleman.services.SwingUtils;
 import assignment.dsa.model.Tab_Order;
+import assignment.dsa.model.Tab_Product;
 
 public class SortByPCodeAndCCode_Order {
 	public File dataFile;
@@ -14,9 +15,12 @@ public class SortByPCodeAndCCode_Order {
 
 	// Order list:
 	// 3.1. Input data
-	public void inputData() {
+	public void inputData(List<Tab_Order> items) {
 		try {
-			items = Json.readList(dataFile, Tab_Order.class);
+			if (items == null)
+				items = Json.readList(dataFile, Tab_Order.class);
+			else
+				this.items = items;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -20,12 +20,15 @@ import assignment.module.manager.SortByPCode;
 import assignment.module.manager.SortByPCodeAndCCode_Order;
 
 public class Main_Order {
+	static List<Tab_Order> orders = new LinkedList<>();
+
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		menuOrder();
 	}
 
 	private static void menuOrder() throws FileNotFoundException, IOException, ParseException {
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("--------------------------");
 		System.out.println("SMS Order");
@@ -41,20 +44,26 @@ public class Main_Order {
 
 			JSONParser parser = new JSONParser();
 			try {
-				JSONArray jsonArray = (JSONArray) parser
-						.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/orders.json"));
-				List<Tab_Order> orders = new LinkedList<>();
-				Iterator iterator = jsonArray.iterator();
-				while (iterator.hasNext()) {
-					Tab_Order to = new Tab_Order();
-					JSONObject jsonObject = (JSONObject) iterator.next();
-					String product_code = (String) jsonObject.get("pcode");
-					String customer_code = (String) jsonObject.get("ccode");
-					long quantity = (long) jsonObject.get("quantity");
-					System.out.println("-------------------------------------");
-					System.out.println("||Product Code:" + product_code + "\n||Customer Code:" + customer_code
-							+ "\n||Product Quantity:" + quantity);
-					orders.add(to);
+				if (orders.isEmpty()) {
+					JSONArray jsonArray = (JSONArray) parser
+							.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/orders.json"));
+					Iterator iterator = jsonArray.iterator();
+					while (iterator.hasNext()) {
+						Tab_Order to = new Tab_Order();
+						JSONObject jsonObject = (JSONObject) iterator.next();
+						String product_code = (String) jsonObject.get("pcode");
+						String customer_code = (String) jsonObject.get("ccode");
+						long quantity = (long) jsonObject.get("quantity");
+						to.ccode = customer_code;
+						to.pcode = product_code;
+						to.quantity = quantity;
+						System.out.println(to.toString());
+						orders.add(to);
+					}
+				} else {
+					for (Tab_Order order : orders) {
+						System.out.println(order.toString());
+					}
 				}
 				menuOrder();
 			} catch (FileNotFoundException e) {
@@ -68,7 +77,7 @@ public class Main_Order {
 		case "2": {
 			SortByPCodeAndCCode_Order sbpco = new SortByPCodeAndCCode_Order();
 			sbpco.dataFile = Res.getDesktopFile("dsa2017-data/1e2/orders.json");
-			sbpco.inputData();
+			sbpco.inputData(orders);
 			sbpco.displayDataWithTotal();
 			sbpco.sortBy_pcode_and_ccode();
 		}

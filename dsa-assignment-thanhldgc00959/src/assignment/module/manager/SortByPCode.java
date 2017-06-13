@@ -15,9 +15,12 @@ public class SortByPCode {
 
 	// Order list:
 	// 3.1. Input data
-	public void inputData() {
+	public void inputData(List<Tab_Product> items) {
 		try {
-			items = Json.readList(dataFile, Tab_Product.class);
+			if (items == null)
+				items = Json.readList(dataFile, Tab_Product.class);
+			else
+				this.items = items;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -26,8 +29,7 @@ public class SortByPCode {
 	// 3.2. Display data with total value
 	public void displayDataWithTotal() {
 		for (Tab_Product ik : items)
-			System.out.println(ik.pcode + "|?" + ik.pro_name + "||" + ik.quantity + ik.sale + "||" + ik.price + "||"
-					+ ik.pro_image_url);
+			System.out.println(ik.toString());
 	}
 
 	public void displayFigure(String t) {

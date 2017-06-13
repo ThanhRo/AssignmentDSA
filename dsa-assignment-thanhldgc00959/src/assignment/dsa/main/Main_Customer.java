@@ -19,12 +19,14 @@ import assignment.module.manager.DeleteByCCode_Customer;
 import assignment.module.manager.SearchByCCode_Customer;
 
 public class Main_Customer {
+	static List<Tab_Customer> customers = new LinkedList<>();
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		menuCustomer();
 	}
 
 	private static void menuCustomer() throws FileNotFoundException, IOException, ParseException {
+	
 		Scanner scan = new Scanner(System.in);
 		System.out.println("--------------------------");
 		System.out.println("SMS Customer");
@@ -42,20 +44,24 @@ public class Main_Customer {
 			// Display Customer
 			JSONParser parser = new JSONParser();
 			try {
-				JSONArray jsonArray = (JSONArray) parser
-						.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/customers.json"));
-				List<Tab_Customer> customers = new LinkedList<>();
-				Iterator iterator = jsonArray.iterator();
-				while (iterator.hasNext()) {
-					Tab_Customer tc = new Tab_Customer();
-					JSONObject jsonObject = (JSONObject) iterator.next();
-					String customer_code = (String) jsonObject.get("ccode");
-					String customer_name = (String) jsonObject.get("cus_name");
-					String customer_phone = (String) jsonObject.get("phone");
-					System.out.println("-------------------------------------");
-					System.out.println("||Customer Code:" + customer_code + "\n||Customer Name:" + customer_name
-							+ "\n||Customer Quantity:" + customer_phone);
-					customers.add(tc);
+				if (customers.isEmpty()) {
+					JSONArray jsonArray = (JSONArray) parser
+							.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/customers.json"));
+					Iterator iterator = jsonArray.iterator();
+					while (iterator.hasNext()) {
+						Tab_Customer tc = new Tab_Customer();
+						JSONObject jsonObject = (JSONObject) iterator.next();
+						String customer_code = (String) jsonObject.get("ccode");
+						String customer_name = (String) jsonObject.get("cus_name");
+						String customer_phone = (String) jsonObject.get("phone");
+						tc.ccode = customer_code;
+						tc.cus_name = customer_name;
+						tc.phone = customer_phone;
+						System.out.println(tc.toString());
+						customers.add(tc);
+					}
+				} else {
+
 				}
 				menuCustomer();
 			} catch (FileNotFoundException e) {
@@ -68,38 +74,16 @@ public class Main_Customer {
 		}
 		case "2": {
 			// Add New Customer
-			JSONParser parser = new JSONParser();// DONT USE SPACE WHEN ADDING
-			try {
-				JSONArray jsonArray = (JSONArray) parser
-						.parse(new FileReader("C:/Users/WIN/Desktop/dsa2017-data/1e2/customers.json"));
-				List<Tab_Customer> customers = new LinkedList<>();
-				Iterator iterator = jsonArray.iterator();
-				while (iterator.hasNext()) {
-					JSONObject jsonObject = (JSONObject) iterator.next();
-					String customer_code = (String) jsonObject.get("ccode");
-					String customer_name = (String) jsonObject.get("cus_name");
-					String customer_phone = (String) jsonObject.get("phone");
-					Tab_Customer tc = new Tab_Customer(customer_code, customer_name, customer_phone);
-					customers.add(tc);
-				}
-				System.out.println("Input customer code: ");
-				String cCode = scan.next();
-				System.out.println("Input customer name: ");
-				String cName = scan.next();
-				System.out.println("Input customer phone: ");
-				String cPhone = scan.next();
-				Tab_Customer tc1 = new Tab_Customer(cCode, cName, cPhone);
-				customers.add(tc1);
-				System.out.print("Successfully add");
-				menuCustomer();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			break;
+			System.out.println("Input customer code: ");
+			String cCode = scan.next();
+			System.out.println("Input customer name: ");
+			String cName = scan.next();
+			System.out.println("Input customer phone: ");
+			String cPhone = scan.next();
+			Tab_Customer tc1 = new Tab_Customer(cCode, cName, cPhone);
+			customers.add(tc1);
+			System.out.print("Successfully add");
+			menuCustomer();
 		}
 		case "3": {
 			// Search by CCode
@@ -108,10 +92,9 @@ public class Main_Customer {
 			System.out.println("Input Customer Code : ");
 			String cCode = scan.next();
 			SearchByCCode_Customer searchCCode = new SearchByCCode_Customer();
-			ArrayList<Tab_Customer> arrayList = searchCCode.SearchByCCode(cCode);
-			for (int i = 0; i < arrayList.size(); i++) {
-				Tab_Customer tc = arrayList.get(i);
-				System.out.println(tc.toString());
+			List<Tab_Customer> arrayList = searchCCode.SearchByCCode(cCode,customers);
+			for (Tab_Customer customer:arrayList) {
+				System.out.println(customer.toString());
 			}
 			menuCustomer();
 			break;
@@ -123,10 +106,9 @@ public class Main_Customer {
 			System.out.println("Input Product Code : ");
 			String cCode = scan.next();
 			DeleteByCCode_Customer deleteCCode = new DeleteByCCode_Customer();
-			ArrayList<Tab_Customer> arraylist = deleteCCode.DeleteByCCode(cCode);
-			for (int i = 0; i < arraylist.size(); i++) {
-				Tab_Customer tc = arraylist.get(i);
-				System.out.println(tc.toString());
+			List<Tab_Customer> arraylist = deleteCCode.DeleteByCCode(cCode,customers);
+			for (Tab_Customer customer:arraylist) {
+				System.out.println(customer.toString());
 			}
 			menuCustomer();
 			break;
