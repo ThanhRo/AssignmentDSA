@@ -153,7 +153,7 @@ public class Main_Product {
 			SortByPCode sbpco = new SortByPCode();
 			sbpco.dataFile = Res.getDesktopFile("dsa2017-data/1e2/products.json");
 			sbpco.inputData(products);
-			sbpco.displayDataWithTotal();
+//			sbpco.displayDataWithTotal();
 			sbpco.sortBy_pcode_and_proname();
 			menuProduct();
 			break;

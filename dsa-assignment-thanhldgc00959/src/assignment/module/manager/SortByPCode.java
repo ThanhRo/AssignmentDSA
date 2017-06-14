@@ -32,9 +32,9 @@ public class SortByPCode {
 			System.out.println(ik.toString());
 	}
 
-	// public void displayFigure(String t) {
-	// SwingUtils.showData(t, items);
-	// }
+//	public void displayFigure(String t) {
+//		SwingUtils.showData(t, items);
+//	}
 
 	// 3.3. Sort by pcode
 	public void sortBy_pcode_and_proname() {
@@ -46,8 +46,7 @@ public class SortByPCode {
 		int d = x.pcode.compareTo(y.pcode);
 		if (d != 0)
 			return d;
-
-		return x.pcode.compareTo(y.pro_name);
+		return x.pro_name.compareTo(y.pro_name);
 
 	}
 }
