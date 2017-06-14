@@ -32,9 +32,9 @@ public class SortByPCode {
 			System.out.println(ik.toString());
 	}
 
-	public void displayFigure(String t) {
-		SwingUtils.showData(t, items);
-	}
+	// public void displayFigure(String t) {
+	// SwingUtils.showData(t, items);
+	// }
 
 	// 3.3. Sort by pcode
 	public void sortBy_pcode_and_proname() {

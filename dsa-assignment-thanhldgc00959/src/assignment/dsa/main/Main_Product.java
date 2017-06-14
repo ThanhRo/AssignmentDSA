@@ -25,6 +25,7 @@ import assignment.module.manager.SortByPCode;
 
 public class Main_Product {
 	static List<Tab_Product> products = new LinkedList<>();
+
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		menuProduct();
@@ -32,7 +33,7 @@ public class Main_Product {
 
 	@SuppressWarnings("unchecked")
 	public static void menuProduct() throws FileNotFoundException, IOException, ParseException {
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("--------------------------");
 		System.out.println("SMS Product");
@@ -41,8 +42,9 @@ public class Main_Product {
 		System.out.println("3.Search By PCode");
 		System.out.println("4.Delete By PCode");
 		System.out.println("5.Sort By PCode");
-		System.out.println("6.Back To Main Menu");
-		System.out.println("Chose from 1 to 6 :");
+		System.out.println("6.Delete after by xPcode");
+		System.out.println("7.Back To Main Menu");
+		System.out.println("Chose from 1 to 7 :");
 		System.out.println("--------------------------");
 
 		String choice = scan.next();
@@ -125,7 +127,7 @@ public class Main_Product {
 			System.out.println("Input Product Code : ");
 			String pCode = scan.next();
 			SearchByPCode searchPCode = new SearchByPCode();
-			ArrayList<Tab_Product> arrayList = searchPCode.SearchByPCode(pCode,products);
+			ArrayList<Tab_Product> arrayList = searchPCode.SearchByPCode(pCode, products);
 			for (Tab_Product tp : arrayList) {
 				System.out.println(tp.toString());
 			}
@@ -139,7 +141,7 @@ public class Main_Product {
 			System.out.println("Input Product Code : ");
 			String pCode = scan.next();
 			DeleteByPCode deletePCode = new DeleteByPCode();
-			ArrayList<Tab_Product> arraylist = deletePCode.DeleteByPCode(pCode,products);
+			deletePCode.DeleteByPCode(pCode, products);
 			for (Tab_Product tp : products) {
 				System.out.println(tp.toString());
 			}
@@ -157,6 +159,19 @@ public class Main_Product {
 			break;
 		}
 		case "6": {
+			System.out.println("-------------------------------------");
+			System.out.println("-------------Delete Product----------");
+			System.out.println("Input Product Code : ");
+			String pCode = scan.next();
+			DeleteByPCode deletePCode = new DeleteByPCode();
+			deletePCode.DeleteAfterByPCode(pCode, products);
+			for (Tab_Product tp : products) {
+				System.out.println(tp.toString());
+			}
+			menuProduct();
+			break;
+		}
+		case "7": {
 			Main m = new Main();
 			m.main(null);
 			break;

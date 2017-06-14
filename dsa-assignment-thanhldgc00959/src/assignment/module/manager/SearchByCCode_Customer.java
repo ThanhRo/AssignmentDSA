@@ -17,7 +17,7 @@ import assignment.dsa.model.Tab_Product;
 
 public class SearchByCCode_Customer {
 
-	public List<Tab_Customer> SearchByCCode(String cCode,List<Tab_Customer> in)
+	public List<Tab_Customer> SearchByCCode(String cCode, List<Tab_Customer> in)
 			throws FileNotFoundException, IOException, ParseException {
 		List<Tab_Customer> resultlist = new ArrayList<Tab_Customer>();
 		for (Tab_Customer o : in) {

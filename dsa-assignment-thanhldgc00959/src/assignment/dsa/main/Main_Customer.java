@@ -15,18 +15,19 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import assignment.dsa.model.Tab_Customer;
+import assignment.dsa.model.Tab_Product;
 import assignment.module.manager.DeleteByCCode_Customer;
 import assignment.module.manager.SearchByCCode_Customer;
 
 public class Main_Customer {
 	static List<Tab_Customer> customers = new LinkedList<>();
-	@SuppressWarnings("unchecked")
+
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		menuCustomer();
 	}
 
 	private static void menuCustomer() throws FileNotFoundException, IOException, ParseException {
-	
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("--------------------------");
 		System.out.println("SMS Customer");
@@ -61,7 +62,9 @@ public class Main_Customer {
 						customers.add(tc);
 					}
 				} else {
-
+					for (Tab_Customer customer : customers) {
+						System.out.println(customer.toString());
+					}
 				}
 				menuCustomer();
 			} catch (FileNotFoundException e) {
@@ -92,8 +95,8 @@ public class Main_Customer {
 			System.out.println("Input Customer Code : ");
 			String cCode = scan.next();
 			SearchByCCode_Customer searchCCode = new SearchByCCode_Customer();
-			List<Tab_Customer> arrayList = searchCCode.SearchByCCode(cCode,customers);
-			for (Tab_Customer customer:arrayList) {
+			List<Tab_Customer> arrayList = searchCCode.SearchByCCode(cCode, customers);
+			for (Tab_Customer customer : arrayList) {
 				System.out.println(customer.toString());
 			}
 			menuCustomer();
@@ -106,8 +109,8 @@ public class Main_Customer {
 			System.out.println("Input Product Code : ");
 			String cCode = scan.next();
 			DeleteByCCode_Customer deleteCCode = new DeleteByCCode_Customer();
-			List<Tab_Customer> arraylist = deleteCCode.DeleteByCCode(cCode,customers);
-			for (Tab_Customer customer:arraylist) {
+			List<Tab_Customer> arraylist = deleteCCode.DeleteByCCode(cCode, customers);
+			for (Tab_Customer customer : arraylist) {
 				System.out.println(customer.toString());
 			}
 			menuCustomer();

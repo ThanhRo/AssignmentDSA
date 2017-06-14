@@ -19,12 +19,13 @@ import assignment.dsa.model.Tab_Product;
 
 public class SearchByPCode {
 
-	public ArrayList<Tab_Product> SearchByPCode(String pCode,List<Tab_Product> in) throws FileNotFoundException, IOException, ParseException {
+	public ArrayList<Tab_Product> SearchByPCode(String pCode, List<Tab_Product> in)
+			throws FileNotFoundException, IOException, ParseException {
 		List<Tab_Product> resultlist = new ArrayList<Tab_Product>();
-		for (Tab_Product o : in){
-			if (o.pcode.equals(pCode)){
-    			resultlist.add(o);    			
-    		}
+		for (Tab_Product o : in) {
+			if (o.pcode.equals(pCode)) {
+				resultlist.add(o);
+			}
 		}
 		return (ArrayList<Tab_Product>) resultlist;
 	}

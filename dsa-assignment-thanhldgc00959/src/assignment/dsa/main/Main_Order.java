@@ -73,6 +73,7 @@ public class Main_Order {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			break;
 		}
 		case "2": {
 			SortByPCodeAndCCode_Order sbpco = new SortByPCodeAndCCode_Order();
@@ -80,6 +81,9 @@ public class Main_Order {
 			sbpco.inputData(orders);
 			sbpco.displayDataWithTotal();
 			sbpco.sortBy_pcode_and_ccode();
+			Main_Order mo = new Main_Order();
+			mo.main(null);
+			break;
 		}
 
 		case "3": {

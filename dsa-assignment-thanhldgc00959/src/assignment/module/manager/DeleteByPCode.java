@@ -22,7 +22,7 @@ import assignment.dsa.model.Tab_Product;
 
 public class DeleteByPCode {
 
-	public ArrayList<Tab_Product> DeleteByPCode(String pCode, List<Tab_Product> in)
+	public List<Tab_Product> DeleteByPCode(String pCode, List<Tab_Product> in)
 			throws FileNotFoundException, IOException, ParseException {
 
 		for (Tab_Product o : in) {
@@ -30,22 +30,18 @@ public class DeleteByPCode {
 				in.remove(o);
 			}
 		}
-		return (ArrayList<Tab_Product>) in;
+		return in;
 
 	}
 
-	public ArrayList<Tab_Product> DeleteAfterByPCode(String pCode, List<Tab_Product> in)
+	public List<Tab_Product> DeleteAfterByPCode(String pCode, List<Tab_Product> in)
 			throws FileNotFoundException, IOException, ParseException {
 
-		for (Tab_Product o : in) {
-			if (o.pcode.equals(pCode)) {
-				if (in.iterator().hasNext()) {
-					in.iterator().next();
-					in.remove(o);
-				}
+		for (int i = 0; i < in.size(); i++) {
+			if (in.get(i).pcode.equals(pCode) && in.size() > i+1) {
+				in.remove(in.get(i+1));
 			}
 		}
-		return (ArrayList<Tab_Product>) in;
-
+		return in;
 	}
 }
